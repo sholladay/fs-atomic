@@ -1,6 +1,7 @@
 'use strict';
 
 const
+    exec = require('child_process').exec,
     fs = require('fs'),
     tempfile = require('tempfile');
 
@@ -28,6 +29,33 @@ function symlink(target, path, type) {
     });
 }
 
+function mkdir() {
+
+    const dirs = [...arguments].reduce(
+        (accumulated, elem) => {
+            if (!elem) {
+                return accumulated;
+            }
+            return accumulated + `'${elem}' `;
+        },
+        ''
+    ).trimRight();
+
+    if (!dirs) {
+        return Promise.resolve();
+    }
+
+    return new Promise((resolve) => {
+        exec('mkdir -p ' + dirs, (err) => {
+            if (err) {
+                throw err;
+            }
+            resolve();
+        });
+    });
+}
+
 module.exports = {
-    symlink
+    symlink,
+    mkdir
 };

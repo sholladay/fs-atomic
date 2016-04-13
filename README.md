@@ -29,6 +29,13 @@ fsAtomic.symlink('mytarget', '/my/dest').then(() => {
 });
 ````
 
+Create nested directories.
+````javascript
+fsAtomic.mkdir('nonexisting/thing', 'another/one').then(() => {
+    console.log('Directories created.');
+});
+````
+
 ## Contributing
 See our [contributing guidelines](https://github.com/sholladay/fs-atomic/blob/master/CONTRIBUTING.md "The guidelines for being involved in this project.") for more details.
 
