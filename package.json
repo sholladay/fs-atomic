@@ -1,0 +1,35 @@
+{
+  "name": "fs-atomic",
+  "version": "0.0.1",
+  "description": "Safer filesystem operations.",
+  "homepage": "https://github.com/sholladay/fs-atomic",
+  "main": "index.js",
+  "author": {
+    "name": "Seth Holladay",
+    "url": "http://seth-holladay.com"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:sholladay/fs-atomic.git"
+  },
+  "bugs": {
+    "url": "https://github.com/sholladay/fs-atomic/issues",
+    "email": "bugs@seth-holladay.com"
+  },
+  "license": "MPL-2.0",
+  "files": [
+    "index.js"
+  ],
+  "dependencies": {
+    "tempfile": "1.1.1"
+  },
+  "keywords": [
+    "safe",
+    "atomic",
+    "fs",
+    "filesystem"
+  ]
+}
