@@ -21,10 +21,12 @@ function mkdir(...args) {
 
     return new Promise((resolve, reject) => {
         exec('mkdir -p ' + dirs, (err) => {
+
             if (err) {
                 reject(err);
                 return;
             }
+
             resolve();
         });
     });
@@ -56,13 +58,13 @@ function symlink(target, destPath, type) {
     });
 }
 
-function writeFile(destPath, data, options) {
+function writeFile(destPath, ...writeArgs) {
 
     return new Promise((resolve, reject) => {
 
         const tempPath = tempfile();
 
-        fs.writeFile(tempPath, data, options, (err) => {
+        fs.writeFile(tempPath, ...writeArgs, (err) => {
 
             if (err) {
                 reject(err);
