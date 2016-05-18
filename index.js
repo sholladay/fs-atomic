@@ -5,12 +5,12 @@ const
     fs = require('fs'),
     tempfile = require('tempfile');
 
-function mkdir() {
+function mkdir(...args) {
 
     const
-        dirs = [...arguments].reduce(
-            (accumulated, elem) => {
-                return elem ? accumulated + `'${elem}' ` : accumulated;
+        dirs = args.reduce(
+            (accumulated, dir) => {
+                return dir ? accumulated + `'${dir}' ` : accumulated;
             },
             ''
         ).trimRight();
@@ -19,10 +19,11 @@ function mkdir() {
         return Promise.resolve();
     }
 
-    return new Promise((resolve) => {
+    return new Promise((resolve, reject) => {
         exec('mkdir -p ' + dirs, (err) => {
             if (err) {
-                throw err;
+                reject(err);
+                return;
             }
             resolve();
         });
@@ -31,20 +32,22 @@ function mkdir() {
 
 function symlink(target, destPath, type) {
 
-    return new Promise((resolve) => {
+    return new Promise((resolve, reject) => {
 
         const tempPath = tempfile();
 
         fs.symlink(target, tempPath, type, (err) => {
 
             if (err) {
-                throw err;
+                reject(err);
+                return;
             }
 
             fs.rename(tempPath, destPath, (err) => {
 
                 if (err) {
-                    throw err;
+                    reject(err);
+                    return;
                 }
 
                 resolve();
@@ -55,20 +58,22 @@ function symlink(target, destPath, type) {
 
 function writeFile(destPath, data, options) {
 
-    return new Promise((resolve) => {
+    return new Promise((resolve, reject) => {
 
         const tempPath = tempfile();
 
         fs.writeFile(tempPath, data, options, (err) => {
 
             if (err) {
-                throw err;
+                reject(err);
+                return;
             }
 
             fs.rename(tempPath, destPath, (err) => {
 
                 if (err) {
-                    throw err;
+                    reject(err);
+                    return;
                 }
 
                 resolve();
