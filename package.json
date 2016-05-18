@@ -1,6 +1,6 @@
 {
   "name": "fs-atomic",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "description": "Safer filesystem operations.",
   "homepage": "https://github.com/sholladay/fs-atomic",
   "main": "index.js",
