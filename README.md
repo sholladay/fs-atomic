@@ -1,4 +1,4 @@
-# fs-atomic
+# fs-atomic [![Build status for fs-atomic on Circle CI.](https://img.shields.io/circleci/project/sholladay/fs-atomic/master.svg "Circle Build Status")](https://circleci.com/gh/sholladay/fs-atomic "FS Atomic Builds")
 
 > Safer filesystem operations.
 
