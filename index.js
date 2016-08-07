@@ -1,19 +1,16 @@
 'use strict';
 
-const
-    exec = require('child_process').exec,
-    fs = require('fs'),
-    tempfile = require('tempfile');
+const { exec } = require('child_process');
+const fs = require('fs');
+const tempfile = require('tempfile');
 
-function mkdir(...args) {
-
-    const
-        dirs = args.reduce(
-            (accumulated, dir) => {
-                return dir ? accumulated + `'${dir}' ` : accumulated;
-            },
-            ''
-        ).trimRight();
+const mkdir = (...args) => {
+    const dirs = args.reduce(
+        (accumulated, dir) => {
+            return dir ? accumulated + `'${dir}' ` : accumulated;
+        },
+        ''
+    ).trimRight();
 
     if (!dirs) {
         return Promise.resolve();
@@ -21,7 +18,6 @@ function mkdir(...args) {
 
     return new Promise((resolve, reject) => {
         exec('mkdir -p ' + dirs, (err) => {
-
             if (err) {
                 reject(err);
                 return;
@@ -30,23 +26,19 @@ function mkdir(...args) {
             resolve();
         });
     });
-}
+};
 
-function symlink(target, destPath, type) {
-
+const symlink = (target, destPath, type) => {
     return new Promise((resolve, reject) => {
-
         const tempPath = tempfile();
 
         fs.symlink(target, tempPath, type, (err) => {
-
             if (err) {
                 reject(err);
                 return;
             }
 
             fs.rename(tempPath, destPath, (err) => {
-
                 if (err) {
                     reject(err);
                     return;
@@ -56,23 +48,19 @@ function symlink(target, destPath, type) {
             });
         });
     });
-}
+};
 
-function writeFile(destPath, ...writeArgs) {
-
+const writeFile = (destPath, ...writeArgs) => {
     return new Promise((resolve, reject) => {
-
         const tempPath = tempfile();
 
         fs.writeFile(tempPath, ...writeArgs, (err) => {
-
             if (err) {
                 reject(err);
                 return;
             }
 
             fs.rename(tempPath, destPath, (err) => {
-
                 if (err) {
                     reject(err);
                     return;
@@ -82,7 +70,7 @@ function writeFile(destPath, ...writeArgs) {
             });
         });
     });
-}
+};
 
 module.exports = {
     mkdir,
