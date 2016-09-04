@@ -4,10 +4,15 @@ const { exec } = require('child_process');
 const fs = require('fs');
 const tempfile = require('tempfile');
 
-const mkdir = (input, option) => {
-    const config = Object.assign({}, option);
+const mkdir = (...args) => {
+    const config = Object.assign(
+        {},
+        typeof args[args.length - 1] === 'object' ?
+            args.pop() :
+            null
+    );
 
-    const dirs = input.reduce(
+    const dirs = args.reduce(
         (accumulated, dir) => {
             return dir ? accumulated + `'${dir}' ` : accumulated;
         },
