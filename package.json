@@ -28,11 +28,11 @@
     "index.js"
   ],
   "dependencies": {
-    "tempfile": "1.1.1"
+    "tempfile": "^1.1.1"
   },
   "devDependencies": {
-    "eslint-config-tidy": "0.3.0",
-    "xo": "0.16.0"
+    "eslint-config-tidy": "^0.3.0",
+    "xo": "^0.16.0"
   },
   "keywords": [
     "safe",

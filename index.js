@@ -4,8 +4,10 @@ const { exec } = require('child_process');
 const fs = require('fs');
 const tempfile = require('tempfile');
 
-const mkdir = (...args) => {
-    const dirs = args.reduce(
+const mkdir = (input, option) => {
+    const config = Object.assign({}, option);
+
+    const dirs = input.reduce(
         (accumulated, dir) => {
             return dir ? accumulated + `'${dir}' ` : accumulated;
         },
@@ -17,7 +19,7 @@ const mkdir = (...args) => {
     }
 
     return new Promise((resolve, reject) => {
-        exec('mkdir -p ' + dirs, (err) => {
+        exec('mkdir -p ' + dirs, { cwd : config.cwd }, (err) => {
             if (err) {
                 reject(err);
                 return;
